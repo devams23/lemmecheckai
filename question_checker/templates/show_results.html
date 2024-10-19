@@ -1,0 +1,22 @@
+<!-- templates/question_checker/show_results.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h2>Results</h2>
+        <ul class="list-group">
+            {% for answer in user_answers %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ answer.question.question_text }}
+                    <span>
+                        Your Answer: {{ answer.user_answer }} | Correct Answer: {{ answer.correct_answer }} 
+                        {% if answer.is_correct %}
+                            <span class="badge bg-success">Correct</span>
+                        {% else %}
+                            <span class="badge bg-danger">Incorrect</span>
+                        {% endif %}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
