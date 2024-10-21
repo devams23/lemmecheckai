@@ -1,5 +1,5 @@
-<!-- templates/question_checker/display_questions.html -->
-{% extends 'base.html' %}
+{% extends 'upload_pdf.html' %}
+
 {% block content %}
     <div class="container">
         <h2>Answer the Questions</h2>
@@ -7,8 +7,8 @@
             {% csrf_token %}
             {% for question in questions %}
                 <div class="form-group">
-                    <label>{{ question.question_text }}</label>
-                    <input type="text" name="answer_{{ question.id }}" class="form-control" placeholder="Your answer">
+                    <label>{{ question }}</label>
+                    <input type="text" name="answer_{{ forloop.counter }}" class="form-control" placeholder="Your answer">
                 </div>
             {% endfor %}
             <button type="submit" class="btn btn-success">Submit Answers</button>
