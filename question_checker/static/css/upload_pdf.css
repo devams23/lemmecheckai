@@ -1,0 +1,41 @@
+/* upload_pdf.css */
+h2 {
+    text-align: center;
+    color: #17a2b8;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: block;
+    color: #343a40;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed #17a2b8;
+    border-radius: 8px;
+    background-color: #eaf4fb;
+    color: #17a2b8;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #218838;
+}

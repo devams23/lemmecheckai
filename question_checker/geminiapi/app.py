@@ -44,8 +44,8 @@ def get_vector_store(text_chunks):
 # Function to create the conversational chain
 def get_conversational_chain():
     prompt_template = """
-    Answer the question as concise and accurate as possible from the provided context, don't provide a wrong answer.\n\n
-    Context:\n{context}\n
+    You are an expert maths teacher.Answer the question in the given context else dont return anything.\n\n
+    Context:{context}\n
     Question: {question}\n
     Answer:
     """
@@ -94,19 +94,26 @@ def parse_pdf(pdf_file):
 def get_numerical_questions():
     # This function interacts with the model to get the correct answer
     # Placeholder for actual implementation
-    user_question = "Which are the numerical questions given here.If there two questions with the same question number and both are numerical then add both in the array.Give all the questions in an array only and if there are no questions just return an empty array."
+    user_question = '''which questions are not theoritical.Give the results in the form of an array of objects like this.Don't add any other text before or after the output. Keep the data type as string for the objects  :
+            {{
+            "question_name": "",
+            "questions": ["ques1", "ques2"],
+            "answer" : [],
+            }}
+            In the question_name also append its sub question name. In the  questions , very shortly(4-5 w) add what is that question asking for.And in the answer array add the answers values of the questions.
+            '''
     response = user_input(user_question)
     
     # Assuming the response comes as a string like '[Q.1 (a), Q.1 (c), Q.2 (b), Q.2 (c), Q.3 (b), Q.3 (c), Q.5 (b), Q.5 (c)]'
-    
+    #print(response)
     # Clean the string: Remove brackets and split by comma
-    cleaned_response = response.strip('[]')  # Remove the square brackets
-    if cleaned_response:  # Check if there is content
-        questions_array = [item.strip() for item in cleaned_response.split(',')]  # Split and strip extra spaces
-    else:
-        questions_array = []  # Return an empty array if no questions are found
+    # cleaned_response = response.strip('[]')  # Remove the square brackets
+    # if cleaned_response:  # Check if there is content
+    #     questions_array = [item.strip() for item in cleaned_response.split(',')]  # Split and strip extra spaces
+    # else:
+    #     questions_array = []  # Return an empty array if no questions are found
 
-    return questions_array
+    return response
 
 
 def get_correct_answers(questions_array):

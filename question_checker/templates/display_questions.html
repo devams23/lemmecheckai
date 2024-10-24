@@ -1,17 +1,116 @@
-{% extends 'upload_pdf.html' %}
-
 {% block content %}
-    <div class="container">
-        <h2>Answer the Questions</h2>
-        <form method="POST">
-            {% csrf_token %}
-            {% for question in questions %}
-                <div class="form-group">
-                    <label>{{ question }}</label>
-                    <input type="text" name="answer_{{ forloop.counter }}" class="form-control" placeholder="Your answer">
-                </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-success">Submit Answers</button>
-        </form>
-    </div>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+    .container {
+        background-color: #ffffff;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        max-width: 900px;
+        margin: 60px auto;
+        padding: 40px;
+        transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+        transform: translateY(-10px);
+    }
+
+    h2 {
+        text-align: center;
+        color: #17a2b8;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .form-group {
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        color: #343a40;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    ul li {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 6px;
+        color: #495057;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    ul li:hover {
+        background-color: #dfe9f3;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        margin-top: 10px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+        border-color: #17a2b8;
+        outline: none;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 15px;
+        background-color: #28a745;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: #218838;
+        transform: translateY(-3px);
+    }
+</style>
+
+<div class="container">
+    <h2>Answer the Questions</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {% for question in questions %}
+            <div class="form-group">
+                <label>{{ question.question_name }}</label>
+                <ul>
+                    {% for subquestion in question.questions %}
+                        <li>{{ subquestion }}</li>
+                        <input type="text" name="answer_{{ forloop.counter }}" class="form-control" placeholder="Enter your answer">
+                    {% endfor %}
+
+                </ul>
+                <br>
+            </div>
+            
+        {% endfor %}
+        <button type="submit" class="btn-submit">Submit Answers</button>
+    </form>
+</div>
 {% endblock %}
