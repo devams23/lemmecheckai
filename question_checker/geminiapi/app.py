@@ -100,7 +100,7 @@ def get_numerical_questions():
             "questions": ["ques1", "ques2"],
             "answer" : [],
             }}
-            In the question_name also append its sub-question name. In the  questions , very shortly(4-5 words) add what is that question asking for. And in the answer array add the answers values of the questions.
+            In the question_name also append its sub-question name. In the  questions , very shortly add what is that question asking for. And in the answer array add the answers values of the questions.
             '''
     response = user_input(user_question)
     

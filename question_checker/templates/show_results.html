@@ -3,31 +3,27 @@
 
 {% block content %}
 <div class="results-container">
-    <h2 class="results-title">Your Answers vs Model Answers</h2>
+    <h2 class="results-title">Verify Your Answers</h2>
     
     {% for question in questions %}
         <div class="question-result">
-            <h3>{{ question.question_name }}</h3>
+            <h3 class="question-title">{{ question.question_name }}</h3>
             <ul class="subquestions-result">
-                {% for subquestion in question.questions  %}
+                {% for subquestion, model_answer, user_answer in question.paired_data %}
                 <li class="subquestion-item">
-                    <strong>{{ subquestion }}</strong> <br>
+                    <div class="subquestion-header">
+                        <span class="subquestion-title"><strong> {{ subquestion }}</strong></span>
+                    </div>
                     <div class="answers-comparison">
-                        <div class="model-answer">
+                        <div class="answer-box model-answer">
                             <strong>Model Answer:</strong> 
-                            {% if question.answer %}
-                                {{ question.answer }} <!-- Use forloop.counter0 to get the correct index -->
-                            {% else %}
-                                No model answer available
-                            {% endif %}
+                            <span class="answer-text">{{ model_answer|default:"No model answer available" }}</span>
                         </div>
-                        <div class="user-answer">
+                        <div class="answer-box user-answer">
                             <strong>Your Answer:</strong> 
-                            {% if question.user_answers %}
-                                {{ question.user_answers}} <!-- Use forloop.counter0 for user answers -->
-                            {% else %}
-                                No answer provided
-                            {% endif %}
+                            <span class="answer-text">
+                                {{ user_answer|default:"No answer provided" }}
+                            </span>
                         </div>
                     </div>
                 </li>
@@ -36,4 +32,77 @@
         </div>
     {% endfor %}
 </div>
+
+<style>
+    .results-container {
+        width: 80%;
+        margin: auto;
+        font-family: Arial, sans-serif;
+    }
+
+    .results-title {
+        text-align: center;
+        font-size: 1.5em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .question-result {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .question-title {
+        font-size: 1.3em;
+        color: #444;
+        margin-bottom: 10px;
+    }
+
+    .subquestion-item {
+        padding: 10px 0;
+        border-top: 1px solid #eee;
+    }
+
+    .subquestion-header {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+
+    .answers-comparison {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .answer-box {
+        flex: 1;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .model-answer {
+        background-color: #e0f7fa;
+        border: 1px solid #00796b;
+    }
+
+    .user-answer {
+        background-color: #fce4ec;
+        border: 1px solid #c2185b;
+    }
+
+    .answer-text {
+        display: inline-block;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .no-answer {
+        color: #d9534f; /* Red for emphasis */
+        font-style: italic;
+    }
+</style>
 {% endblock %}

@@ -3,6 +3,100 @@
 {% block title %}Answer Questions - LemmeCheckAI{% endblock %}
 
 {% block content %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif; /* Modern font */
+        background-color: #f0f4f8; /* Soft background for contrast */
+        color: #333; /* Standard text color */
+        line-height: 1.6;
+    }
+    .questions-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff; /* White for clean look */
+    }
+    .questions-title {
+        font-size: 28px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #4CAF50; /* Vibrant green for title */
+    }
+    .form-group {
+        margin-bottom: 30px; /* Space between questions */
+        padding: 20px;
+        border-radius: 10px;
+        background: #e8f5e9; /* Light green background for questions */
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+    .form-group:hover {
+        transform: scale(1.02); /* Slight scaling on hover */
+    }
+    .question-label {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #388E3C;
+    }
+    .subquestions-list {
+        list-style: none;
+        padding: 0;
+    }
+    .subquestion {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 12px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
+    .subquestion:hover {
+        background-color: #c8e6c9; /* Light green hover effect */
+    }
+    .subquestion span {
+        flex: 1;
+        font-size: 16px;
+        color: #555; /* Slightly muted text for sub-question labels */
+        margin-right: 10px; /* Space between label and input */
+    }
+    .form-control {
+        flex: 2;
+        padding: 10px 14px; /* Comfortable padding */
+        font-size: 14px;
+        border: 2px solid #c8e6c9;
+        border-radius: 8px;
+        background-color: #ffffff; /* White background for inputs */
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .form-control:focus {
+        border-color: #4CAF50; /* Green border on focus */
+        outline: none;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Green shadow on focus */
+    }
+    .btn-submit {
+        display: block;
+        width: 100%;
+        padding: 14px 0;
+        background-color: #4CAF50; /* Green submit button */
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 20px;
+    }
+    .btn-submit:hover {
+        background-color: #388E3C; /* Darker green on hover */
+        /* Button lift effect */
+    }
+</style>
+
 <div class="questions-container">
     <h2 class="questions-title">Answer the Questions</h2>
     <form method="POST">
@@ -11,11 +105,10 @@
             <div class="form-group">
                 <label class="question-label">{{ question.question_name }}</label>
                 <ul class="subquestions-list">
-                    {% for subquestion in question.questions%}
+                    {% for subquestion in question.questions %}
                         <li class="subquestion">
                             <span>{{ subquestion }}</span>
-                            <!-- Use forloop.parentloop.counter and forloop.counter to make unique name -->
-                            <input type="text" name="answer_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="form-control" placeholder="Enter your answer">
+                            <input type="text" name="answer_{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="form-control" placeholder="Type your answer here">
                         </li>
                     {% endfor %}
                 </ul>

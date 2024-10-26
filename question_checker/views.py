@@ -51,65 +51,11 @@ def display_questions_view(request):
     # Convert JSON string to list of questions
     try:
         questions_anwers = json.loads(questions_str)
+        print(questions_anwers)
     except json.JSONDecodeError: 
         return render(request, 'error_page.html', {'error': 'Invalid question format'})
-#     questions_anwers = [
-# {
-#     "question_name": "Q1.(a).Find probabilities",
-#     "questions": ["union", "complement"],
-#     "answer": ["0.4", "0.6"]
-# },
-# {
-#     "question_name": "Q1.(c).Baye's Theorem",
-#     "questions": ["probability"],
-#     "answer": ["0.0588"]
-# },
-# {
-#     "question_name": "Q2.(b).Mean and SD",
-#     "questions": ["mean", "SD"],
-#     "answer": ["12.05", "1.635"]
-# },
-# {
-#     "question_name": "Q2.(c).Heights of female students",
-#     "questions": ["mean", "variance", "median"],
-#     "answer": ["65.78", "4.284", "66"]
-# },
-# {
-#     "question_name": "Q2.(c).OR Quartile Range",
-#     "questions": ["Q1", "Q3", "Q5", "IQR"],
-#     "answer": ["17.5", "23.93", "27.5", "6.43"]
-# },
-# {
-#     "question_name": "Q3.(b).Regression lines",
-#     "questions": ["regression line of y on x", "regression line of x on y"],
-#     "answer": ["y = 0.59x + 26.3", "x = 1.2y + 8.2"]
-# },
-# {
-#     "question_name": "Q3.(c).Defective bottles",
-#     "questions": ["boxes with no defects", "boxes with at least 2 defects"],
-#     "answer": ["90.44", "9.56"]
-# },
-# {
-#     "question_name": "Q3.(b).OR Best fitting line",
-#     "questions": ["a", "b"],
-#     "answer": ["0", "1.6"]
-# },
-# {
-#     "question_name": "Q3.(c).OR Number of bulbs",
-#     "questions": ["bulbs with >2400 hours", "bulbs between 1900-2300 hours"],
-#     "answer": ["228", "642"]
-# },
-# {
-#     "question_name": "Q5.(b).Tyre company claim",
-#     "questions": ["t-value"],
-#     "answer": ["5.03"]
-# },
-# {
-#     "question_name": "Q5.(c).Mistakes per page",
-#     "questions": ["chi-square value"],
-#     "answer": ["1.58"]
-# }
-# ]
+    
+    # questions_anwers = [{'question_name': 'Q.1 (a) (i)  Probability Calculation', 'questions': ['Find the probability of A union B'], 'answer': [0.4]}, {'question_name': 'Q.1 (a) (ii) Probability Calculation', 'questions': ['Find the probability of complement of A union B'], 'answer': [0.6]}, {'question_name': 'Q.1 (c) Bayes Theorem', 'questions': ['Find the probability of a scooter driver given that the driver had an accident'], 'answer': [0.0588]}, {'question_name': 'Q.2 (b) Mean and Standard Deviation', 'questions': ['Calculate the mean of the distribution', 'Calculate the standard deviation of the distribution'], 'answer': [12.11, 1.1391]}, {'question_name': 'Q.2 (c) (i) Sample Mean and Variance', 'questions': ['Calculate the sample mean of the heights', 'Calculate the sample variance of the heights'], 'answer': [65.81, 4.29]}, {'question_name': 'Q.2 (c) (iii) Median', 'questions': ['Find the median height'], 'answer': [66]}, {'question_name': 'Q.2 (c)  Quartiles and Interquartile Range', 'questions': ['Determine Q1', 'Determine Q3', 'Determine Q5', 'Calculate the interquartile range'], 'answer': [17.5, 25, 32.5, 7.5]}, {'question_name': 'Q.3 (b) Regression Lines', 'questions': ['Find the regression line of y on x', 'Find the regression line of x on y'], 'answer': ['y = 57.14 + 0.39x', 'x = 28.24 + 0.89y']}, {'question_name': 'Q.3 (c) Poisson Distribution', 'questions': ['Find the number of boxes with no defective bottles', 'Find the number of boxes with at least 2 defective bottles'], 'answer': [90, 2.6]}, {'question_name': 'Q.3 (b) Best Fitting Straight Line', 'questions': ['Find the equation of the best fitting straight line'], 'answer': ['y = 0.2 + 1.8x']}, {'question_name': 'Q.3 (c) Normal Distribution', 'questions': ['Find the number of bulbs expected to burn more than 2400 hours', 'Find the number of bulbs expected to burn between 1900 and 2300 hours'], 'answer': [228, 642]}, {'question_name': 'Q.5 (b) Hypothesis Testing', 'questions': ['Calculate the test statistic', 'Determine if the new product is significantly better'], 'answer': [2.86, 'Yes, the new product is significantly better']}, {'question_name': 'Q.5 (c) Poisson Distribution and Goodness of Fit', 'questions': ['Calculate the expected frequencies for each category', 'Calculate the chi-square test statistic', 'Determine the degrees of freedom', 'Determine the critical value at a significance level (e.g., 0.05)', 'Conclude whether to accept or reject the fit'], 'answer': [[209.18, 94.13, 21.19, 3.18, 0.32], [1.39], [2], [5.99], ['Accept the fit']]}]
     # Store questions in session
     request.session['questions'] = questions_anwers
     
@@ -119,6 +65,10 @@ def display_questions_view(request):
 def show_results_view(request):
     # Retrieve the updated questions with user answers from the session
     questions = request.session.get('questions', [])
-    print(questions)
+
+    print("show results view" ,questions[0])
+    for question in questions:
+        question['paired_data'] = list(zip(question['questions'], question['answer'], question['user_answers']))
+    print(questions[0])
     # Pass questions with user answers to the template
     return render(request, 'show_results.html', {'questions': questions})

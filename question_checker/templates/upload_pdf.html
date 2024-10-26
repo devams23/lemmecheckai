@@ -6,15 +6,68 @@
 <div class="upload-container">
     <h2 class="upload-title">Upload Your PDF</h2>
     <p class="upload-description">Select a PDF file to verify answers using our AI assistant.</p>
-    <form method="POST" enctype="multipart/form-data">
+    
+    <form method="POST" enctype="multipart/form-data" onsubmit="showSpinnerInButton()">
         {% csrf_token %}
+        
         <div class="form-group">
-            <label for="pdf_file" class="form-label">Select a PDF to upload:</label>
+            <label for="pdf_file" class="form-label">Choose PDF File:</label>
             <div class="file-input-container">
                 <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf" class="form-control" required>
             </div>
         </div>
-        <button type="submit" class="btn-submit">Upload PDF</button>
+
+        <button type="submit" id="uploadButton" class="btn-submit">
+            <span id="buttonText">Upload PDF</span>
+            <span id="spinner" class="spinner" style="display: none; margin-left: 10px;"></span>
+        </button>
     </form>
 </div>
+
+<style>
+
+    .btn-submit {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-submit:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
+
+    /* Spinner inside button */
+    .spinner::after {
+        content: '';
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid white;
+        border-radius: 50%;
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+
+<script>
+    function showSpinnerInButton() {
+        document.getElementById("uploadButton").disabled = true;  // Disable the button
+        document.getElementById("buttonText").textContent = "Uploading...";  // Change button text
+        document.getElementById("spinner").style.display = "inline-block";  // Show spinner inside button
+    }
+</script>
 {% endblock %}
