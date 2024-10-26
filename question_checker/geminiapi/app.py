@@ -94,13 +94,13 @@ def parse_pdf(pdf_file):
 def get_numerical_questions():
     # This function interacts with the model to get the correct answer
     # Placeholder for actual implementation
-    user_question = '''which questions are not theoritical.Give the results in the form of an array of objects like this.Don't add any other text before or after the output. Keep the data type as string for the objects  :
+    user_question = '''which questions are not theoritical.Give the results in the form of an array of objects like this. Don't add any other text before or after the output.:
             {{
             "question_name": "",
             "questions": ["ques1", "ques2"],
             "answer" : [],
             }}
-            In the question_name also append its sub question name. In the  questions , very shortly(4-5 w) add what is that question asking for.And in the answer array add the answers values of the questions.
+            In the question_name also append its sub-question name. In the  questions , very shortly(4-5 words) add what is that question asking for. And in the answer array add the answers values of the questions.
             '''
     response = user_input(user_question)
     

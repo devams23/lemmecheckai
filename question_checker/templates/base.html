@@ -4,29 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Application{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Common CSS -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}LemmeCheckAI{% endblock %}</title>
 </head>
 <body>
-
     <header>
-        <div class="header-content">
-            <h1>My Application</h1>
+        <div class="header-container">
+            <h1 class="header-text">LemmeCheckAI</h1>
+            <p class="tagline">Your AI Assistant for Answer Verification</p>
+            <p class="header-description">Upload your PDF documents to get instant verification of answers.</p>
+            <nav class="social-links">
+                <a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </nav>
         </div>
     </header>
-
+    
     <main>
-        <div class="container">
-            {% block content %}
-            {% endblock %}
-        </div>
+        {% block content %}{% endblock %}
     </main>
 
     <footer>
-        <p>&copy; 2024 My Application. All rights reserved.</p>
+        <div class="footer-container">
+            <p>&copy; 2023 LemmeCheckAI. All rights reserved.</p>
+            <div class="social-links-footer">
+                <a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
     </footer>
 
 </body>

@@ -1,22 +1,39 @@
-<!-- templates/show_results.html -->
-{% extends 'upload_pdf.html' %}
+{% extends 'base.html' %}
+{% block title %}Results - LemmeCheckAI{% endblock %}
+
 {% block content %}
-    <div class="container">
-        <h2>Results</h2>
-        <ul class="list-group">
-            {% for answer in user_answers %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ answer.question.question_text }}
-                    <span>
-                        Your Answer: {{ answer.user_answer }} | Correct Answer: {{ answer.correct_answer }} 
-                        {% if answer.is_correct %}
-                            <span class="badge bg-success">Correct</span>
-                        {% else %}
-                            <span class="badge bg-danger">Incorrect</span>
-                        {% endif %}
-                    </span>
+<div class="results-container">
+    <h2 class="results-title">Your Answers vs Model Answers</h2>
+    
+    {% for question in questions %}
+        <div class="question-result">
+            <h3>{{ question.question_name }}</h3>
+            <ul class="subquestions-result">
+                {% for subquestion in question.questions  %}
+                <li class="subquestion-item">
+                    <strong>{{ subquestion }}</strong> <br>
+                    <div class="answers-comparison">
+                        <div class="model-answer">
+                            <strong>Model Answer:</strong> 
+                            {% if question.answer %}
+                                {{ question.answer }} <!-- Use forloop.counter0 to get the correct index -->
+                            {% else %}
+                                No model answer available
+                            {% endif %}
+                        </div>
+                        <div class="user-answer">
+                            <strong>Your Answer:</strong> 
+                            {% if question.user_answers %}
+                                {{ question.user_answers}} <!-- Use forloop.counter0 for user answers -->
+                            {% else %}
+                                No answer provided
+                            {% endif %}
+                        </div>
+                    </div>
                 </li>
-            {% endfor %}
-        </ul>
-    </div>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

@@ -1,97 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload PDF</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 30px;
-            background-color: #ffffff;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-        .container:hover {
-            transform: translateY(-10px);
-        }
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #17a2b8;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .form-group {
-            margin-bottom: 25px;
-        }
-        .form-group label {
-            font-size: 1.2rem;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 10px;
-            color: #555;
-        }
-        .form-group input[type="file"] {
-            width: 100%;
-            padding: 15px;
-            border: 2px dashed #17a2b8;
-            border-radius: 8px;
-            cursor: pointer;
-            background-color: #eaf4fb;
-            color: #17a2b8;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-        .form-group input[type="file"]:hover {
-            background-color: #d0ecf6;
-            border-color: #117a8b;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        .submit-btn:hover {
-            background-color: #218838;
-            transform: translateY(-3px);
-        }
-    </style>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <div class="container">
-        <h1>Upload Your PDF</h1>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="pdf_file">Select a PDF to upload:</label>
-                <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf">
+{% block title %}Upload PDF - LemmeCheckAI{% endblock %}
+
+{% block content %}
+<div class="upload-container">
+    <h2 class="upload-title">Upload Your PDF</h2>
+    <p class="upload-description">Select a PDF file to verify answers using our AI assistant.</p>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="pdf_file" class="form-label">Select a PDF to upload:</label>
+            <div class="file-input-container">
+                <input type="file" id="pdf_file" name="pdf_file" accept="application/pdf" class="form-control" required>
             </div>
-            <button type="submit" class="submit-btn">Upload PDF</button>
-        </form>
-    </div>
-
-
-</body>
-</html>
+        </div>
+        <button type="submit" class="btn-submit">Upload PDF</button>
+    </form>
+</div>
+{% endblock %}
