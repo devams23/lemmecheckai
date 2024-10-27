@@ -1,48 +1,51 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     <title>{% block title %}LemmeCheckAI{% endblock %}</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="header-container">
-            <h1 class="header-text">LemmeCheckAI</h1>
-            <p class="tagline">Your AI Assistant for Answer Verification</p>
-          
-            <nav class="social-links">
-                <a href="https://github.com/yourusername" target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-            </nav>
-        </div>
+      <div class="header-container">
+        <h1 class="header-text">LemmeCheckAI</h1>
+        <p class="tagline">Your AI Assistant for Answer Verification</p>
+
+        <nav class="social-links">
+          <a href="https://github.com/devams23/lemmecheckai" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/devam-satasiya" target="_blank">
+            <i class="fab fa-linkedin"></i>
+          </a>
+        </nav>
+      </div>
     </header>
-    
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+
+    <main>{% block content %}{% endblock %}</main>
 
     <footer>
-        <div class="footer-container">
-            <p>&copy; 2024 LemmeCheckAI. All rights reserved.</p>
-            <div class="social-links-footer">
-                <a href="https://github.com/yourusername" target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-            </div>
+      <div class="footer-container">
+        <p>&copy; 2024 LemmeCheckAI. All rights reserved.</p>
+        <div class="social-links-footer">
+          <a href="https://github.com/devams23/lemmecheckai" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/devam-satasiya" target="_blank">
+            <i class="fab fa-linkedin"></i>
+          </a>
         </div>
+      </div>
     </footer>
-
-</body>
+  </body>
 </html>
